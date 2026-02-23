@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataStudio — Where Strategy Meets Systems</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg: #0a0a0a;
+            --bg-secondary: #111111;
+            --text: #ffffff;
+            --text-muted: #888888;
+            --accent: #00ffaa;
+            --accent-dim: rgba(0, 255, 170, 0.1);
+        }
+        
+        body {
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: var(--bg);
+        }
+        
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
+        }
+        
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.5px;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: var(--text);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.75rem;
+            background: var(--accent);
+            color: var(--bg);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        
+        .btn:hover {
+            background: #fff;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--text-muted);
+            color: var(--text);
+        }
+        
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: transparent;
+        }
+        
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 5%;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+        }
+        
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            margin-bottom: 2rem;
+        }
+        
+        .hero h1 .accent {
+            color: var(--accent);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 3rem;
+            line-height: 1.7;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #333, transparent);
+            margin: 0 5%;
+        }
+        
+        /* What We Do */
+        .what-we-do {
+            padding: 8rem 5%;
+        }
+        
+        .section-label {
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 4rem;
+            letter-spacing: -1px;
+            max-width: 700px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: #222;
+            border: 1px solid #222;
+        }
+        
+        .service-item {
+            padding: 3rem;
+            background: var(--bg);
+            transition: all 0.3s;
+        }
+        
+        .service-item:hover {
+            background: var(--bg-secondary);
+        }
+        
+        .service-item:hover .service-number {
+            color: var(--accent);
+        }
+        
+        .service-number {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .service-item h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .service-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        /* Work */
+        .work {
+            padding: 8rem 5%;
+            background: var(--bg-secondary);
+        }
+        
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .work-item {
+            border: 1px solid #222;
+            padding: 2.5rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .work-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: var(--accent);
+            transition: height 0.3s;
+        }
+        
+        .work-item:hover {
+            border-color: #333;
+            background: rgba(255,255,255,0.02);
+        }
+        
+        .work-item:hover::before {
+            height: 100%;
+        }
+        
+        .work-tag {
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .work-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .work-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        /* Approach */
+        .approach {
+            padding: 8rem 5%;
+        }
+        
+        .approach-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+        
+        .approach-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            letter-spacing: -1px;
+        }
+        
+        .approach-text p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .approach-list {
+            list-style: none;
+            margin-top: 3rem;
+        }
+        
+        .approach-list li {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #222;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .approach-list li::before {
+            content: '→';
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        /* Founder */
+        .founder {
+            padding: 8rem 5%;
+            background: var(--bg-secondary);
+        }
+        
+        .founder-content {
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+            max-width: 900px;
+        }
+        
+        .founder-visual {
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(135deg, var(--accent-dim), transparent);
+            border: 1px solid #333;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .founder-visual span {
+            font-size: 3rem;
+            opacity: 0.5;
+        }
+        
+        .founder-bio .section-label {
+            margin-bottom: 1rem;
+        }
+        
+        .founder-bio h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .founder-bio p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        .founder-brands {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .founder-brands span {
+            font-size: 0.85rem;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        /* CTA */
+        .cta {
+            padding: 8rem 5%;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1.5px;
+        }
+        
+        .cta h2 .accent {
+            color: var(--accent);
+        }
+        
+        .cta p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 3rem 5%;
+            border-top: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        footer a:hover {
+            color: var(--accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .work-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .approach-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero {
+                padding-top: 6rem;
+                min-height: auto;
+            }
+            
+            header {
+                padding: 1.25rem 5%;
+            }
+            
+            nav {
+                gap: 1.5rem;
+            }
+            
+            nav a:not(.btn) {
+                display: none;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .cta h2 {
+                font-size: 2.5rem;
+            }
+            
+            .founder-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            footer {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">Data<span>Studio</span></div>
+        <nav>
+            <a href="#services">Services</a>
+            <a href="#work">Work</a>
+            <a href="#approach">Approach</a>
+            <a href="#contact" class="btn">Get in Touch</a>
+        </nav>
+    </header>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>We build marketing systems that <span class="accent">scale</span></h1>
+            <p>DataStudio is a boutique consultancy helping growth-stage companies turn data into revenue through strategy, technology, and AI.</p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn">Start a Project</a>
+                <a href="#work" class="btn btn-outline">View Work</a>
+            </div>
+        </div>
+    </section>
+    
+    <div class="divider"></div>
+    
+    <!-- What We Do -->
+    <section class="what-we-do" id="services">
+        <div class="section-label">Services</div>
+        <h2 class="section-title">Strategy and execution, integrated. We don't hand off decks — we build and ship.</h2>
+        
+        <div class="services-grid">
+            <div class="service-item">
+                <div class="service-number">01</div>
+                <h3>Marketing Strategy</h3>
+                <p>Go-to-market planning, positioning, and growth architecture. We align your marketing engine with business outcomes.</p>
+            </div>
+            <div class="service-item">
+                <div class="service-number">02</div>
+                <h3>Technology & Systems</h3>
+                <p>CRM architecture, marketing automation, customer data platforms. Infrastructure that scales with you.</p>
+            </div>
+            <div class="service-item">
+                <div class="service-number">03</div>
+                <h3>AI Integration</h3>
+                <p>Practical AI for marketing and operations. Customer intelligence, predictive analytics, automation.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Work -->
+    <section class="work" id="work">
+        <div class="section-label">Selected Work</div>
+        <h2 class="section-title">Recent engagements across industries.</h2>
+        
+        <div class="work-grid">
+            <div class="work-item">
+                <div class="work-tag">AI · Regulated Industry</div>
+                <h3>Document Intelligence Platform</h3>
+                <p>Architected an AI-powered document analysis platform from concept to pilot — OCR, classification, and natural language queries at scale.</p>
+            </div>
+            <div class="work-item">
+                <div class="work-tag">CRM · Professional Services</div>
+                <h3>Salesforce Ecosystem Overhaul</h3>
+                <p>Consolidated disparate systems into unified Salesforce ecosystem. 40% improvement in lead-to-close visibility.</p>
+            </div>
+            <div class="work-item">
+                <div class="work-tag">GTM · B2B SaaS</div>
+                <h3>Go-to-Market Strategy</h3>
+                <p>Positioning, pricing, and launch playbook for B2B software entering new vertical market.</p>
+            </div>
+            <div class="work-item">
+                <div class="work-tag">Martech · Hospitality</div>
+                <h3>Customer Data Infrastructure</h3>
+                <p>Designed centralized CDP strategy across multiple business verticals and disparate operational systems.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Approach -->
+    <section class="approach" id="approach">
+        <div class="approach-content">
+            <div class="approach-text">
+                <div class="section-label">How We Work</div>
+                <h2>Embedded. Outcome-driven. Temporary by design.</h2>
+                <p>We don't do hourly consulting or drive-by audits. We embed with your team for 3-6 months, own outcomes, and build systems that outlast our engagement.</p>
+            </div>
+            <div class="approach-list-wrap">
+                <ul class="approach-list">
+                    <li>3-6 month engagements</li>
+                    <li>Outcome-based scope</li>
+                    <li>Team integration</li>
+                    <li>Knowledge transfer built in</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Founder -->
+    <section class="founder" id="team">
+        <div class="founder-content">
+            <div class="founder-visual"><span>JP</span></div>
+            <div class="founder-bio">
+                <div class="section-label">Founded By</div>
+                <h3>John Padwick</h3>
+                <p>15 years building marketing infrastructure for category-leading brands. Former CMO and President. MBA from UT Austin McCombs.</p>
+                <div class="founder-brands">
+                    <span>Merkle</span>
+                    <span>Marriott</span>
+                    <span>Hilton</span>
+                    <span>Disney</span>
+                    <span>Waldorf Astoria</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA -->
+    <section class="cta" id="contact">
+        <h2>Let's <span class="accent">build</span> something</h2>
+        <p>Have a marketing infrastructure challenge? Let's talk.</p>
+        <a href="mailto:john@datastudio.com" class="btn">Start a Conversation</a>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div>© 2026 DataStudio</div>
+        <a href="mailto:john@datastudio.com">john@datastudio.com</a>
+    </footer>
+</body>
+</html>

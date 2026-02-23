@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DataStudio — We Build What's Missing</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -117,6 +119,9 @@
         }
         
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             font-size: 1.3rem;
             font-weight: 800;
             color: #fff;
@@ -124,9 +129,17 @@
             letter-spacing: -0.5px;
         }
         
+        .logo img {
+            height: 32px;
+            width: auto;
+            filter: brightness(0) invert(1);
+            transition: filter 0.3s;
+        }
+        
         .logo span { color: var(--accent); }
         
         header.scrolled .logo { color: var(--primary); }
+        header.scrolled .logo img { filter: none; }
         
         nav { display: flex; gap: 2.5rem; align-items: center; }
         nav a { 
@@ -857,7 +870,7 @@
 </head>
 <body>
     <header>
-        <a href="#" class="logo">Data<span>Studio</span></a>
+        <a href="#" class="logo"><img src="logos/ds-icon.png" alt="">Data<span>Studio</span></a>
         <nav>
             <a href="#services">Services</a>
             <a href="#approach">Approach</a>

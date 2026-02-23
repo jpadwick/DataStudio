@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataStudio — We Build What's Missing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a5f;
+            --primary-light: #2d5a8a;
+            --accent: #d4a853;
+            --text-dark: #1a1a2e;
+            --text-medium: #4a4a68;
+            --text-light: #717188;
+            --bg-white: #ffffff;
+            --bg-light: #f8f9fc;
+            --bg-dark: #1a1a2e;
+            --border: #e2e4eb;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        header.scrolled {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+        
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 0;
+        }
+        
+        .logo span { font-weight: 700; color: var(--accent); }
+        
+        header.scrolled .logo { color: var(--primary); }
+        header.scrolled .logo span { color: var(--accent); }
+        
+        nav { display: flex; gap: 2rem; align-items: center; }
+        nav a { text-decoration: none; color: rgba(255,255,255,0.9); font-weight: 500; font-size: 0.9rem; }
+        header.scrolled nav a { color: var(--text-medium); }
+        nav a:hover { color: var(--accent); }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: var(--text-dark);
+        }
+        
+        .btn-primary:hover {
+            background: #c49743;
+            transform: translateY(-2px);
+        }
+        
+        /* Hero */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: 0;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.88) 0%, rgba(30, 58, 95, 0.85) 100%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 750px;
+            padding: 2rem 5%;
+            color: #fff;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero p {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 5rem 5%;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        
+        /* Services Section */
+        .services {
+            background: var(--bg-light);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .service-card {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        
+        .service-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .service-card h3 svg {
+            flex-shrink: 0;
+        }
+        
+        .service-card p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            line-height: 1.75;
+            margin-bottom: 1rem;
+        }
+        
+        .service-card .highlight {
+            font-style: italic;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            border-left: 3px solid var(--accent);
+            padding-left: 1rem;
+            margin-top: 1.25rem;
+        }
+        
+        /* Difference Section */
+        .difference {
+            background: var(--primary);
+            color: #fff;
+        }
+        
+        .difference .section-header h2 {
+            color: #fff;
+        }
+        
+        .difference .section-header p {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .proof-points {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .proof-point {
+            background: rgba(255,255,255,0.08);
+            border-radius: 8px;
+            padding: 1.25rem 1.5rem;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.9);
+        }
+        
+        .proof-point strong {
+            color: var(--accent);
+        }
+        
+        .difference-closing {
+            text-align: center;
+            margin-top: 2.5rem;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.95);
+        }
+        
+        /* Process Section */
+        .process {
+            background: var(--bg-white);
+        }
+        
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .process-step {
+            text-align: center;
+        }
+        
+        .step-num {
+            width: 48px;
+            height: 48px;
+            background: var(--accent);
+            color: var(--text-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 0 auto 1.25rem;
+        }
+        
+        .process-step h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+        
+        .process-step p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        /* Experience Section */
+        .experience {
+            background: var(--bg-light);
+        }
+        
+        .experience-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .experience h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .experience > p {
+            color: var(--text-medium);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+        }
+        
+        .experience-section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .experience-section h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-light);
+            margin-bottom: 1.25rem;
+        }
+        
+        .logo-strip {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            padding: 0 1rem;
+        }
+        
+        .logo-strip img {
+            height: 50px;
+            width: auto;
+            max-width: 140px;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s;
+        }
+        
+        .logo-strip img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        
+        .clients-list {
+            color: var(--text-medium);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+        
+        /* CTA Section */
+        .cta {
+            background: var(--bg-dark);
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        
+        .cta p {
+            color: rgba(255,255,255,0.75);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 2.5rem 5%;
+            background: var(--bg-dark);
+            color: rgba(255,255,255,0.6);
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        footer a { color: var(--accent); text-decoration: none; }
+        
+        /* Responsive */
+        @media (max-width: 900px) {
+            .services-grid { grid-template-columns: 1fr; }
+            .process-grid { grid-template-columns: 1fr; gap: 2rem; }
+            nav { display: none; }
+            .logo-strip { gap: 1.5rem; }
+            .logo-strip img { height: 40px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">Data<span>Studio</span></a>
+        <nav>
+            <a href="#services">Services</a>
+            <a href="#approach">Approach</a>
+            <a href="#contact" class="btn btn-primary">Let's Talk</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline poster="https://img1.wsimg.com/isteam/videos/xrGWO5Q">
+            <source src="https://categories.api.godaddy.com/v4/videos/raw/video/xrGWO5Q" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>We build what's missing.</h1>
+            <p>Every company we've worked with had the same problem: the strategy was there, but the infrastructure wasn't. We step in to build the systems, teams, and operations that turn strategy into revenue.</p>
+            <a href="#contact" class="btn btn-primary">Schedule a Call</a>
+        </div>
+    </section>
+    
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2>What We Do</h2>
+            <p>Four capabilities. One operating philosophy: build it, measure it, grow it.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1e3a5f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    Executive Leadership & Business Transformation
+                </h3>
+                <p>We step into interim or fractional CMO and President roles — not to fill a seat, but to change how the business operates. We've run P&Ls, restructured operations, managed HR and finance, built teams from scratch, and reported directly to boards. We bring C-suite accountability to companies that need senior leadership without a 12-month search.</p>
+                <p class="highlight">We've taken offline businesses and built the entire data, CRM, and measurement infrastructure that transformed how they operated — turning intuition-driven organizations into data-driven growth engines.</p>
+            </div>
+            
+            <div class="service-card">
+                <h3>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1e3a5f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 3v18h18"/>
+                        <path d="M18 9l-5 5-4-4-3 3"/>
+                        <circle cx="18" cy="9" r="2"/>
+                    </svg>
+                    Marketing & Revenue Operations
+                </h3>
+                <p>We build the infrastructure that connects marketing activity to revenue — then run the strategy on top of it. CRM implementation and customization (Salesforce, HubSpot), marketing automation, multi-touch attribution, pipeline forecasting, lead scoring, and KPI frameworks.</p>
+                <p>We've done this from the ground up at organizations that had nothing — no CRM, no attribution, no data — and built systems that drove record revenue and 50%+ improvements in conversion.</p>
+                <p class="highlight">This isn't stack optimization. It's building the operational backbone of a revenue organization.</p>
+            </div>
+            
+            <div class="service-card">
+                <h3>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1e3a5f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
+                        <path d="M16 14h.01"/>
+                        <path d="M8 14h.01"/>
+                        <rect x="4" y="12" width="16" height="10" rx="2"/>
+                        <path d="M9 22v-4h6v4"/>
+                    </svg>
+                    AI Implementation
+                </h3>
+                <p>We don't advise on AI — we build with it. We recently designed, architected, and deployed a production RAG system for a legal services client: document ingestion, vector search, semantic retrieval, and conversational AI processing hundreds of documents with near-perfect accuracy. That system is now launching commercially.</p>
+                <p>We bring this same capability to clients: practical AI integration into marketing and operations workflows. Document intelligence, semantic search, LLM-powered automation, and custom AI tooling — built on modern stacks (React, Node.js, PostgreSQL, Pinecone, OpenAI, Claude) by people who've shipped production systems, not just prototypes.</p>
+            </div>
+            
+            <div class="service-card">
+                <h3>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1e3a5f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                        <polyline points="17 6 23 6 23 12"/>
+                    </svg>
+                    Go-to-Market Strategy
+                </h3>
+                <p>Product launches, market entry, competitive positioning, and brand architecture. We've launched luxury brands to global markets, built verticals from zero to $100M+ in billings, and scaled companies from one location to five.</p>
+                <p>We develop messaging frameworks, positioning strategies, and launch plans — then stay to execute them. When sales enablement is needed — pitch decks, battle cards, objection handling — it's built into the GTM plan, not sold as a separate engagement.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="difference">
+        <div class="section-header">
+            <h2>The DataStudio Difference</h2>
+            <p>We don't optimize what's already working. We build what's missing.</p>
+        </div>
+        <div class="proof-points">
+            <div class="proof-point">
+                Took a hospitality company's online revenue from <strong>$6M to $100M</strong>.
+            </div>
+            <div class="proof-point">
+                Built a <strong>$100M+ business vertical</strong> that didn't exist 18 months earlier.
+            </div>
+            <div class="proof-point">
+                Deployed enterprise CRM across an entire organization — from client management to sales to marketing to operations — and used that infrastructure to help drive a <strong>$370M outcome</strong>.
+            </div>
+            <div class="proof-point">
+                Scaled a business from zero digital presence to <strong>15,000 qualified leads per month</strong>.
+            </div>
+        </div>
+        <p class="difference-closing">This is what we do. We walk into gaps and build engines.</p>
+    </section>
+    
+    <section class="process" id="approach">
+        <div class="section-header">
+            <h2>How We Work</h2>
+            <p>We embed with your team to understand the real constraints — not the symptoms — then build and execute.</p>
+        </div>
+        <div class="process-grid">
+            <div class="process-step">
+                <div class="step-num">1</div>
+                <h4>Discovery</h4>
+                <p>Deep dive into your business, market, team, and current capabilities. We identify what's actually missing — infrastructure, process, talent, or all three.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num">2</div>
+                <h4>Strategy</h4>
+                <p>A focused plan with clear priorities, timelines, and success metrics. No 80-page decks. Actionable recommendations with a build plan.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num">3</div>
+                <h4>Build & Execute</h4>
+                <p>Hands-on implementation, system deployment, team leadership, or enablement — whatever moves fastest. We stay engaged until the infrastructure is running and results are delivered.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="experience">
+        <div class="experience-inner">
+            <h2>Where We've Operated</h2>
+            <p>We've held CMO and President roles at companies in hospitality, legal services, and entertainment — managing P&Ls, building teams, and owning business outcomes at the board level.</p>
+            
+            <div class="experience-section" style="margin-top: 2.5rem;">
+                <h4>Operated At</h4>
+                <div class="logo-strip">
+                    <img src="logos/hilton.png" alt="Hilton">
+                    <img src="logos/marriott.png" alt="Marriott">
+                    <img src="logos/wyndham.png" alt="Wyndham">
+                    <img src="logos/merkle.png" alt="Merkle">
+                </div>
+            </div>
+            
+            <div class="experience-section">
+                <h4>Delivered Results For</h4>
+                <p class="clients-list">Disney · Royal Caribbean · Universal Studios · Loews Hotels · and high-growth companies across legal, healthcare, and entertainment</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta" id="contact">
+        <h2>Ready to build what's missing?</h2>
+        <p>30-minute strategy call. No pitch, no pressure — just a conversation about where you are and where the gaps are.</p>
+        <a href="mailto:info@datastudio.com" class="btn btn-primary">Schedule a Call →</a>
+    </section>
+    
+    <footer>
+        <div class="footer-inner">
+            <p>© 2026 DataStudio. All rights reserved.</p>
+            <p><a href="mailto:info@datastudio.com">info@datastudio.com</a></p>
+        </div>
+    </footer>
+    
+    <script>
+        window.addEventListener('scroll', () => {
+            document.querySelector('header').classList.toggle('scrolled', window.scrollY > 50);
+        });
+    </script>
+</body>
+</html>

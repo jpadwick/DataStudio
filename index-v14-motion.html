@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DataStudio — We Build What's Missing</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -119,9 +117,6 @@
         }
         
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
             font-size: 1.3rem;
             font-weight: 800;
             color: #fff;
@@ -129,17 +124,9 @@
             letter-spacing: -0.5px;
         }
         
-        .logo img {
-            height: 32px;
-            width: auto;
-            filter: brightness(0) invert(1);
-            transition: filter 0.3s;
-        }
-        
         .logo span { color: var(--accent); }
         
         header.scrolled .logo { color: var(--primary); }
-        header.scrolled .logo img { filter: none; }
         
         nav { display: flex; gap: 2.5rem; align-items: center; }
         nav a { 
@@ -653,172 +640,50 @@
             font-weight: 500;
         }
         
-        /* Contact Form Section */
-        .contact-section {
+        /* CTA */
+        .cta-section {
             background: var(--bg-white);
+            text-align: center;
             padding: 7rem 5%;
             position: relative;
             overflow: hidden;
         }
         
-        .contact-section::before {
+        .cta-section::before {
             content: '';
             position: absolute;
             top: 50%;
-            right: -200px;
-            transform: translateY(-50%);
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(212, 168, 83, 0.08) 0%, transparent 60%);
-            animation: pulse 10s ease-in-out infinite;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(212, 168, 83, 0.1) 0%, transparent 60%);
+            animation: pulse 8s ease-in-out infinite;
         }
         
-        .contact-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .contact-content h2 {
-            font-size: clamp(2rem, 4vw, 2.75rem);
+        .cta-title {
+            font-size: clamp(2.25rem, 4vw, 3rem);
             font-weight: 800;
             letter-spacing: -1px;
             color: var(--text-dark);
             margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
         }
         
-        .contact-content p {
+        .cta-subtitle {
             font-size: 1.1rem;
             color: var(--text-medium);
+            max-width: 420px;
+            margin: 0 auto 2rem;
             line-height: 1.8;
-            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
         }
         
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .contact-info a {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            color: var(--text-medium);
-            text-decoration: none;
-            font-size: 1rem;
-            transition: color 0.3s;
-        }
-        
-        .contact-info a:hover {
-            color: var(--accent);
-        }
-        
-        .contact-info .location-text {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            color: var(--text-light);
-            font-size: 1rem;
-        }
-        
-        .contact-info svg {
-            width: 20px;
-            height: 20px;
-            stroke: var(--accent);
-            stroke-width: 1.5;
-            fill: none;
-        }
-        
-        .contact-form {
-            background: var(--bg-cream);
-            border-radius: 20px;
-            padding: 2.5rem;
-            border: 1px solid var(--border);
-        }
-        
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
-        
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-        }
-        
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 0.875rem 1rem;
-            font-size: 1rem;
-            font-family: inherit;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: var(--bg-white);
-            color: var(--text-dark);
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.15);
-        }
-        
-        .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        
-        .form-group select {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234a4a68' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            padding-right: 2.5rem;
-        }
-        
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-        
-        .contact-form .btn {
-            width: 100%;
-            justify-content: center;
-            padding: 1rem;
-            font-size: 1rem;
-            margin-top: 0.5rem;
-        }
-        
-        .form-note {
-            text-align: center;
-            font-size: 0.8rem;
-            color: var(--text-light);
-            margin-top: 1rem;
-        }
-        
-        @media (max-width: 900px) {
-            .contact-container {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
-            }
-            .form-row {
-                grid-template-columns: 1fr;
-            }
+        .cta-section .btn {
+            position: relative;
+            z-index: 1;
         }
         
         /* Footer */
@@ -830,17 +695,6 @@
             align-items: center;
             color: rgba(255,255,255,0.5);
             font-size: 0.9rem;
-        }
-        
-        .footer-left {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-        
-        .footer-location {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.4);
         }
         
         footer a {
@@ -870,7 +724,7 @@
 </head>
 <body>
     <header>
-        <a href="#" class="logo"><img src="logos/ds-icon.png" alt="">Data<span>Studio</span></a>
+        <a href="#" class="logo">Data<span>Studio</span></a>
         <nav>
             <a href="#services">Services</a>
             <a href="#approach">Approach</a>
@@ -1020,69 +874,14 @@
         </p>
     </section>
     
-    <section class="contact-section" id="contact">
-        <div class="contact-container">
-            <div class="contact-content animate">
-                <h2>Ready to build what's missing?</h2>
-                <p>30-minute strategy call. No pitch, no pressure — just a conversation about where you are and where the gaps are.</p>
-                <div class="contact-info">
-                    <a href="mailto:info@datastudio.com">
-                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                            <polyline points="22,6 12,13 2,6"/>
-                        </svg>
-                        info@datastudio.com
-                    </a>
-                    <span class="location-text">
-                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                            <circle cx="12" cy="10" r="3"/>
-                        </svg>
-                        Santa Monica, CA, USA
-                    </span>
-                </div>
-            </div>
-            <form class="contact-form animate" action="https://formspree.io/f/mjgepjer" method="POST">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required placeholder="Your name">
-                    </div>
-                    <div class="form-group">
-                        <label for="company">Company</label>
-                        <input type="text" id="company" name="company" placeholder="Your company">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required placeholder="you@company.com">
-                </div>
-                <div class="form-group">
-                    <label for="interest">What are you looking for?</label>
-                    <select id="interest" name="interest">
-                        <option value="">Select an option...</option>
-                        <option value="executive">Fractional/Interim Executive</option>
-                        <option value="revops">Revenue Operations</option>
-                        <option value="ai">AI Implementation</option>
-                        <option value="gtm">Go-to-Market Strategy</option>
-                        <option value="other">Something else</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="message">Tell us about your situation</label>
-                    <textarea id="message" name="message" placeholder="What's the gap you're trying to fill?"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Send Message →</button>
-                <p class="form-note">We'll respond within 24 hours.</p>
-            </form>
-        </div>
+    <section class="cta-section" id="contact">
+        <h2 class="cta-title animate">Ready to build what's missing?</h2>
+        <p class="cta-subtitle animate">30-minute strategy call. No pitch, no pressure — just a conversation about where you are and where the gaps are.</p>
+        <a href="mailto:info@datastudio.com" class="btn btn-primary animate">Schedule a Call →</a>
     </section>
     
     <footer>
-        <div class="footer-left">
-            <p>© 2026 DataStudio</p>
-            <p class="footer-location">Santa Monica, CA, USA</p>
-        </div>
+        <p>© 2026 DataStudio</p>
         <a href="mailto:info@datastudio.com">info@datastudio.com</a>
     </footer>
     

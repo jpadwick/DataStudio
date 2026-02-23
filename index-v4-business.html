@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataStudio — Marketing Strategy & Execution</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #1e40af;
+            --primary-blue-light: #3b82f6;
+            --primary-blue-dark: #1e3a8a;
+            --text-dark: #111827;
+            --text-medium: #4b5563;
+            --text-light: #6b7280;
+            --bg-white: #ffffff;
+            --bg-light: #f9fafb;
+            --bg-blue-subtle: #eff6ff;
+            --border: #e5e7eb;
+            --border-blue: #bfdbfe;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: var(--bg-white);
+        }
+        
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 5%;
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--text-medium);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: var(--primary-blue);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary-blue);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: var(--primary-blue-dark);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary-blue);
+            color: #fff;
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 5rem 5%;
+            background: linear-gradient(180deg, var(--bg-blue-subtle) 0%, var(--bg-white) 100%);
+        }
+        
+        .hero-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            color: var(--primary-blue);
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-medium);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* Credibility Bar */
+        .credibility {
+            padding: 3rem 5%;
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .credibility-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .credibility p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            opacity: 0.6;
+        }
+        
+        .logos span {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-medium);
+        }
+        
+        /* Services */
+        .services {
+            padding: 5rem 5%;
+            background: var(--bg-white);
+        }
+        
+        .services h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+        }
+        
+        .services > p {
+            text-align: center;
+            color: var(--text-medium);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .service-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        
+        .service-card:hover {
+            border-color: var(--border-blue);
+            box-shadow: 0 4px 20px rgba(30, 64, 175, 0.08);
+        }
+        
+        .service-card .number {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            background: var(--bg-blue-subtle);
+            color: var(--primary-blue);
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.9rem;
+            line-height: 36px;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .service-card p {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+        }
+        
+        /* Approach */
+        .approach {
+            padding: 5rem 5%;
+            background: var(--bg-light);
+        }
+        
+        .approach-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .approach h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 3rem;
+        }
+        
+        .approach-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .approach-step {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+        
+        .approach-step .step-num {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            background: var(--primary-blue);
+            color: #fff;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .approach-step h3 {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+        
+        .approach-step p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+        }
+        
+        /* About */
+        .about {
+            padding: 5rem 5%;
+            background: var(--bg-white);
+        }
+        
+        .about-inner {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .about h2 {
+            font-size: 1.75rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+        
+        .about p {
+            color: var(--text-medium);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .about-credentials {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .credential {
+            text-align: center;
+        }
+        
+        .credential .value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        .credential .label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+        
+        /* CTA */
+        .cta {
+            padding: 5rem 5%;
+            background: var(--primary-blue);
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+        
+        .cta p {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta .btn {
+            background: #fff;
+            color: var(--primary-blue);
+            padding: 1rem 2rem;
+            font-size: 1rem;
+        }
+        
+        .cta .btn:hover {
+            background: var(--bg-light);
+        }
+        
+        /* Footer */
+        footer {
+            padding: 2rem 5%;
+            background: var(--bg-light);
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        footer a {
+            color: var(--text-medium);
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: var(--primary-blue);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav {
+                gap: 1rem;
+            }
+            
+            .approach-step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .approach-step .step-num {
+                margin: 0 auto;
+            }
+            
+            .logos {
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">DataStudio</div>
+        <nav>
+            <a href="#services">Services</a>
+            <a href="#approach">Approach</a>
+            <a href="#about">About</a>
+            <a href="#contact" class="btn">Let's Talk</a>
+        </nav>
+    </header>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-inner">
+            <h1>Marketing strategy that <span>moves the needle.</span></h1>
+            <p>Fractional CMO services and marketing operations consulting for growth-stage companies ready to scale.</p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn">Schedule a Call</a>
+                <a href="#services" class="btn btn-outline">View Services</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Credibility Bar -->
+    <section class="credibility">
+        <div class="credibility-inner">
+            <p>Leadership experience at</p>
+            <div class="logos">
+                <span>Marriott</span>
+                <span>Hilton</span>
+                <span>Disney</span>
+                <span>Wyndham</span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services -->
+    <section class="services" id="services">
+        <h2>How We Help</h2>
+        <p>Strategic marketing leadership without the full-time overhead.</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="number">1</div>
+                <h3>Fractional CMO</h3>
+                <p>Executive-level marketing leadership on a flexible basis. Strategy, team oversight, and board-level reporting.</p>
+            </div>
+            <div class="service-card">
+                <div class="number">2</div>
+                <h3>Marketing Operations</h3>
+                <p>Audit and optimize your martech stack. CRM, automation, attribution — get the systems working for you.</p>
+            </div>
+            <div class="service-card">
+                <div class="number">3</div>
+                <h3>Go-to-Market Strategy</h3>
+                <p>Positioning, messaging, and launch planning for new products or market expansion.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Approach -->
+    <section class="approach" id="approach">
+        <div class="approach-inner">
+            <h2>The Process</h2>
+            <div class="approach-steps">
+                <div class="approach-step">
+                    <div class="step-num">1</div>
+                    <div>
+                        <h3>Discovery</h3>
+                        <p>We start with a deep dive into your business, market, and current marketing function. No templates — just clarity.</p>
+                    </div>
+                </div>
+                <div class="approach-step">
+                    <div class="step-num">2</div>
+                    <div>
+                        <h3>Strategy</h3>
+                        <p>A focused plan with clear priorities, timelines, and success metrics. Built for execution, not slide decks.</p>
+                    </div>
+                </div>
+                <div class="approach-step">
+                    <div class="step-num">3</div>
+                    <div>
+                        <h3>Execution</h3>
+                        <p>Hands-on implementation or team enablement — whatever moves the needle fastest.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="about-inner">
+            <h2>Leadership You Can Trust</h2>
+            <p>DataStudio was founded by John Padwick, a marketing executive with over two decades of experience building brands and scaling revenue for hospitality, legal, and technology companies.</p>
+            <p>From Fortune 500 hotel brands to one of California's largest law firms, the thread is the same: turn strategy into results.</p>
+            <div class="about-credentials">
+                <div class="credential">
+                    <div class="value">20+</div>
+                    <div class="label">Years Experience</div>
+                </div>
+                <div class="credential">
+                    <div class="value">MBA</div>
+                    <div class="label">& MPA Degrees</div>
+                </div>
+                <div class="credential">
+                    <div class="value">4</div>
+                    <div class="label">Fortune 500 Brands</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA -->
+    <section class="cta" id="contact">
+        <h2>Ready to Talk?</h2>
+        <p>30-minute strategy call. No pitch, no pressure — just a conversation about your goals and whether we're a fit.</p>
+        <a href="mailto:john@datastudio.com" class="btn">Schedule a Call</a>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 DataStudio. All rights reserved. | <a href="mailto:john@datastudio.com">john@datastudio.com</a></p>
+    </footer>
+</body>
+</html>

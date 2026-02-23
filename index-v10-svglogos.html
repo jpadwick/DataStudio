@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataStudio — Strategic Growth Powered by Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a5f;
+            --primary-light: #2d5a8a;
+            --accent: #d4a853;
+            --text-dark: #1a1a2e;
+            --text-medium: #4a4a68;
+            --text-light: #717188;
+            --bg-white: #ffffff;
+            --bg-light: #f8f9fc;
+            --bg-dark: #1a1a2e;
+            --border: #e2e4eb;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        header.scrolled {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+        
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 0;
+        }
+        
+        .logo span { font-weight: 700; color: var(--accent); }
+        
+        header.scrolled .logo { color: var(--primary); }
+        header.scrolled .logo span { color: var(--accent); }
+        
+        nav { display: flex; gap: 2rem; align-items: center; }
+        nav a { text-decoration: none; color: rgba(255,255,255,0.9); font-weight: 500; font-size: 0.9rem; }
+        header.scrolled nav a { color: var(--text-medium); }
+        nav a:hover { color: var(--accent); }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: var(--text-dark);
+        }
+        
+        .btn-primary:hover {
+            background: #c49743;
+            transform: translateY(-2px);
+        }
+        
+        /* Hero with Video */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: 0;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.85) 0%, rgba(30, 58, 95, 0.8) 100%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            padding: 2rem 5%;
+            color: #fff;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero h1 span { color: var(--accent); }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+        
+        .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+        
+        /* Services Section */
+        .services {
+            padding: 6rem 5%;
+            background: var(--bg-light);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .service-card {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: all 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+        
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+        }
+        
+        .service-card p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        /* Image + Text Split Section */
+        .split-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 500px;
+        }
+        
+        .split-image {
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .split-image.muted {
+            filter: saturate(0.3) brightness(0.95);
+        }
+        
+        .split-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem 5%;
+        }
+        
+        .split-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+        
+        .split-content p {
+            color: var(--text-medium);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* How We Work / Approach */
+        .approach {
+            padding: 6rem 5%;
+            background: var(--bg-white);
+        }
+        
+        .approach-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            align-items: center;
+        }
+        
+        .approach-intro h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .approach-intro p {
+            color: var(--text-medium);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+        
+        .approach-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .approach-step {
+            display: flex;
+            gap: 1.25rem;
+            align-items: flex-start;
+        }
+        
+        .step-num {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            color: var(--text-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .approach-step h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--text-dark);
+        }
+        
+        .approach-step p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .approach-image {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .approach-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Experience Section with Logo Strip */
+        .experience {
+            padding: 5rem 5%;
+            background: var(--bg-light);
+        }
+        
+        .experience-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .experience h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+        }
+        
+        .logo-strip {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+            padding: 0 1rem;
+        }
+        
+        .logo-strip img {
+            height: 60px;
+            width: auto;
+            max-width: 180px;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s;
+        }
+        
+        .logo-strip img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        
+        .experience-body {
+            color: var(--text-medium);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 6rem 5%;
+            background: var(--primary);
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        
+        .cta p {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 3rem 5%;
+            background: var(--bg-dark);
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        footer a { color: var(--accent); text-decoration: none; }
+        
+        /* Responsive */
+        @media (max-width: 900px) {
+            .split-section { grid-template-columns: 1fr; }
+            .split-image { min-height: 300px; }
+            .approach-grid { grid-template-columns: 1fr; }
+            nav { display: none; }
+            .logo-strip { gap: 2rem; }
+        }
+        
+        @media (max-width: 600px) {
+            .logo-strip { gap: 1.5rem; }
+            .logo-strip svg { height: 22px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">Data<span>Studio</span></a>
+        <nav>
+            <a href="#services">Services</a>
+            <a href="#approach">Approach</a>
+            <a href="#contact" class="btn btn-primary">Let's Talk</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline poster="https://img1.wsimg.com/isteam/videos/xrGWO5Q">
+            <source src="https://categories.api.godaddy.com/v4/videos/raw/video/xrGWO5Q" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Strategic growth powered by <span>intelligence.</span></h1>
+            <p>We help growth-stage companies scale smarter—combining executive leadership with modern AI implementation to drive measurable results.</p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn btn-primary">Schedule a Call</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2>What We Do</h2>
+            <p>Executive leadership and hands-on execution for companies navigating growth, transition, or transformation.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <h3>Executive Leadership</h3>
+                <p>Step into interim or fractional roles—CMO, VP Marketing, VP Sales—to lead teams, set strategy, and drive execution during critical growth phases or leadership transitions.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                        <polyline points="17 6 23 6 23 12"/>
+                    </svg>
+                </div>
+                <h3>Marketing & Growth</h3>
+                <p>Go-to-market strategy, positioning, CRM optimization, and team building. From new product launches to market expansion, we move from strategy to execution.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
+                </div>
+                <h3>Marketing Operations</h3>
+                <p>Audit and optimize your martech stack. CRM, automation, attribution—we get systems working together so your team can focus on growth.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
+                        <path d="M16 14h.01"/>
+                        <path d="M8 14h.01"/>
+                        <rect x="4" y="12" width="16" height="10" rx="2"/>
+                        <path d="M9 22v-4h6v4"/>
+                    </svg>
+                </div>
+                <h3>AI Implementation</h3>
+                <p>Practical AI integration for marketing and operations. We recently built a production RAG system with document processing, semantic search, and conversational AI for a client in legal services—now launching commercially. We build what we recommend.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 3v18h18"/>
+                        <path d="M18 9l-5 5-4-4-3 3"/>
+                        <circle cx="18" cy="9" r="2"/>
+                    </svg>
+                </div>
+                <h3>Revenue Operations</h3>
+                <p>Align sales, marketing, and customer success around shared data and processes. Pipeline forecasting, lead scoring, and attribution that connects activity to revenue.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10 9 9 9 8 9"/>
+                    </svg>
+                </div>
+                <h3>Sales Enablement</h3>
+                <p>Equip your sales team with the tools to win. Pitch decks, battle cards, objection handling, and collateral that bridges the gap between marketing messaging and closed deals.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                </div>
+                <h3>Customer Research & Insights</h3>
+                <p>Win/loss analysis, voice of customer programs, and persona development. Understand why you're winning—and losing—so you can do more of what works.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                </div>
+                <h3>Brand Strategy</h3>
+                <p>Messaging frameworks, competitive positioning, and brand architecture. Define who you are, what you stand for, and how you show up in market—consistently.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="split-section">
+        <div class="split-image muted" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=800');"></div>
+        <div class="split-content">
+            <h2>Built for leaders who need results, not decks.</h2>
+            <p>We've led marketing at Fortune 500 brands and scaled revenue at high-growth companies. We've held CMO and President roles at firms in hospitality, legal, and entertainment. We know what it takes to move from strategy to execution—because we've been accountable for the results.</p>
+            <p>We work best with leaders who value both experience and evidence. Who want partners that combine pattern recognition from decades of operating experience with the technical capability to actually build and implement.</p>
+        </div>
+    </section>
+    
+    <section class="approach" id="approach">
+        <div class="approach-grid">
+            <div class="approach-intro">
+                <h2>How We Work</h2>
+                <p>We embed with your team to understand the business, then build and execute a plan that moves the needle.</p>
+                <div class="approach-steps">
+                    <div class="approach-step">
+                        <div class="step-num">1</div>
+                        <div>
+                            <h4>Discovery</h4>
+                            <p>Deep dive into your business, market position, team, and current capabilities. We identify the real constraints—not just the symptoms.</p>
+                        </div>
+                    </div>
+                    <div class="approach-step">
+                        <div class="step-num">2</div>
+                        <div>
+                            <h4>Strategy</h4>
+                            <p>A focused plan with clear priorities, timelines, and success metrics. No 80-page decks. Actionable recommendations you can execute.</p>
+                        </div>
+                    </div>
+                    <div class="approach-step">
+                        <div class="step-num">3</div>
+                        <div>
+                            <h4>Execution</h4>
+                            <p>Hands-on implementation, team leadership, or enablement—whatever moves fastest. We stay engaged until results are delivered.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="approach-image">
+                <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600" alt="Team collaboration">
+            </div>
+        </div>
+    </section>
+    
+    <section class="experience">
+        <div class="experience-inner">
+            <h2>Where we've operated.</h2>
+            <div class="logo-strip">
+                <img src="logos/hilton.png" alt="Hilton">
+                <img src="logos/wyndham.png" alt="Wyndham">
+                <img src="logos/marriott.png" alt="Marriott">
+                <img src="logos/jetblue.png" alt="JetBlue">
+                <img src="logos/merkle.png" alt="Merkle">
+            </div>
+            <p class="experience-body">We've held CMO and President roles at firms in hospitality, legal, and entertainment. We bring operating experience to every engagement—we've managed P&Ls, built teams, and been accountable to boards.</p>
+        </div>
+    </section>
+    
+    <section class="cta" id="contact">
+        <h2>Ready to scale smarter?</h2>
+        <p>30-minute strategy call. No pitch, no pressure—just a conversation about where you are and where you want to go.</p>
+        <a href="mailto:info@datastudio.com" class="btn btn-primary">Schedule a Call →</a>
+    </section>
+    
+    <footer>
+        <div class="footer-inner">
+            <p>© 2026 DataStudio. All rights reserved.</p>
+            <p><a href="mailto:info@datastudio.com">info@datastudio.com</a></p>
+        </div>
+    </footer>
+    
+    <script>
+        window.addEventListener('scroll', () => {
+            document.querySelector('header').classList.toggle('scrolled', window.scrollY > 50);
+        });
+    </script>
+</body>
+</html>

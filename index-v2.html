@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataStudio — Where Strategy Meets Systems</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #1a1a2e;
+            line-height: 1.6;
+            background: #fff;
+        }
+        
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo span {
+            color: #6366f1;
+        }
+        
+        nav a {
+            margin-left: 2rem;
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: #6366f1;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #6366f1;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        
+        .btn:hover {
+            background: #4f46e5;
+            transform: translateY(-1px);
+        }
+        
+        .btn-dark {
+            background: #1a1a2e;
+        }
+        
+        .btn-dark:hover {
+            background: #2d2d44;
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 10rem 5% 6rem;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #e0e7ff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 150%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%236366f1;stop-opacity:0.1"/><stop offset="100%" style="stop-color:%238b5cf6;stop-opacity:0.05"/></linearGradient></defs><circle cx="400" cy="400" r="300" fill="url(%23g)"/><circle cx="600" cy="200" r="150" fill="url(%23g)"/><circle cx="200" cy="600" r="100" fill="url(%23g)"/></svg>') no-repeat center;
+            background-size: contain;
+            opacity: 0.8;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            max-width: 700px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+        
+        .hero h1 span {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: #555;
+            margin-bottom: 2rem;
+            max-width: 550px;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        /* Stats */
+        .stats {
+            padding: 4rem 5%;
+            background: #1a1a2e;
+            display: flex;
+            justify-content: center;
+            gap: 5rem;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #6366f1;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #a0aec0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* What We Do */
+        .what-we-do {
+            padding: 6rem 5%;
+            background: #fff;
+        }
+        
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1a1a2e;
+        }
+        
+        .section-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .pillars {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .pillar {
+            padding: 2.5rem;
+            background: #f8fafc;
+            border-radius: 16px;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+        
+        .pillar:hover {
+            background: #fff;
+            border-color: #e2e8f0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            transform: translateY(-4px);
+        }
+        
+        .pillar-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .pillar h3 {
+            font-size: 1.35rem;
+            margin-bottom: 0.75rem;
+            color: #1a1a2e;
+        }
+        
+        .pillar p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        /* Case Studies */
+        .case-studies {
+            padding: 6rem 5%;
+            background: #f8fafc;
+        }
+        
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .case-card {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: all 0.3s;
+        }
+        
+        .case-card:hover {
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+        }
+        
+        .case-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .case-image-1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .case-image-2 {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .case-image-3 {
+            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .case-image svg {
+            width: 80px;
+            height: 80px;
+            opacity: 0.3;
+        }
+        
+        .case-content {
+            padding: 1.5rem;
+        }
+        
+        .case-tag {
+            font-size: 0.75rem;
+            color: #6366f1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .case-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            color: #1a1a2e;
+        }
+        
+        .case-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Approach */
+        .approach {
+            padding: 6rem 5%;
+            background: #1a1a2e;
+            color: #fff;
+        }
+        
+        .approach .section-header h2 {
+            color: #fff;
+        }
+        
+        .approach .section-header p {
+            color: #a0aec0;
+        }
+        
+        .approach-steps {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .approach-step {
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+        }
+        
+        .approach-step h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .approach-step p {
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+        
+        /* Team */
+        .team {
+            padding: 6rem 5%;
+            background: #fff;
+        }
+        
+        .team-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .team-photo {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: rgba(255,255,255,0.3);
+        }
+        
+        .team-bio {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .team-bio .label {
+            font-size: 0.8rem;
+            color: #6366f1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-bio h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: #1a1a2e;
+        }
+        
+        .team-bio p {
+            color: #555;
+            margin-bottom: 1rem;
+        }
+        
+        .team-brands {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .team-brands span {
+            font-size: 0.85rem;
+            color: #888;
+            font-weight: 500;
+        }
+        
+        /* CTA */
+        .cta {
+            padding: 6rem 5%;
+            text-align: center;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #fff;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta .btn {
+            background: #fff;
+            color: #6366f1;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .cta .btn:hover {
+            background: #f8fafc;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 2rem 5%;
+            background: #1a1a2e;
+            color: #a0aec0;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+        
+        footer a {
+            color: #a0aec0;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: #fff;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+            
+            .hero {
+                padding: 8rem 5% 4rem;
+                min-height: auto;
+            }
+            
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 5%;
+            }
+            
+            nav a {
+                margin-left: 1rem;
+            }
+            
+            .stats {
+                gap: 2rem;
+            }
+            
+            .team-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">Data<span>Studio</span></div>
+        <nav>
+            <a href="#work">Work</a>
+            <a href="#approach">Approach</a>
+            <a href="#team">Team</a>
+            <a href="#contact" class="btn">Start a Project</a>
+        </nav>
+    </header>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>We build marketing systems that <span>turn data into revenue</span></h1>
+            <p>DataStudio is a boutique consultancy that helps growth-stage companies build the infrastructure for scalable, intelligent marketing.</p>
+            <div class="hero-cta">
+                <a href="#work" class="btn">See Our Work</a>
+                <a href="#contact" class="btn btn-dark">Start a Project</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats -->
+    <section class="stats">
+        <div class="stat">
+            <span class="stat-number">15+</span>
+            <span class="stat-label">Years Experience</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number">$50M+</span>
+            <span class="stat-label">Revenue Influenced</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number">40+</span>
+            <span class="stat-label">Martech Implementations</span>
+        </div>
+    </section>
+    
+    <!-- What We Do -->
+    <section class="what-we-do">
+        <div class="section-header">
+            <h2>What We Do</h2>
+            <p>Strategy, technology, and execution — integrated. We don't hand off decks. We build and ship.</p>
+        </div>
+        <div class="pillars">
+            <div class="pillar">
+                <div class="pillar-icon">🎯</div>
+                <h3>Marketing Strategy</h3>
+                <p>Go-to-market planning, positioning, and growth strategy. We align your marketing engine with business outcomes — not vanity metrics.</p>
+            </div>
+            <div class="pillar">
+                <div class="pillar-icon">⚙️</div>
+                <h3>Technology & Systems</h3>
+                <p>CRM architecture, marketing automation, customer data platforms. We design and implement the infrastructure that scales with you.</p>
+            </div>
+            <div class="pillar">
+                <div class="pillar-icon">🤖</div>
+                <h3>AI Integration</h3>
+                <p>Practical AI for marketing and operations. Customer intelligence, predictive analytics, and automation — without the hype.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Case Studies -->
+    <section class="case-studies" id="work">
+        <div class="section-header">
+            <h2>Recent Work</h2>
+            <p>A selection of recent engagements across industries.</p>
+        </div>
+        <div class="case-grid">
+            <div class="case-card">
+                <div class="case-image case-image-1">
+                    <svg viewBox="0 0 24 24" fill="white"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                </div>
+                <div class="case-content">
+                    <div class="case-tag">AI · Regulated Industry</div>
+                    <h3>Document Intelligence Platform</h3>
+                    <p>Architected an AI-powered document analysis platform from concept to pilot — handling OCR, classification, and natural language queries at scale.</p>
+                </div>
+            </div>
+            <div class="case-card">
+                <div class="case-image case-image-2">
+                    <svg viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                </div>
+                <div class="case-content">
+                    <div class="case-tag">CRM · Professional Services</div>
+                    <h3>Salesforce Ecosystem Overhaul</h3>
+                    <p>Consolidated disparate systems into a unified Salesforce ecosystem. 40% improvement in lead-to-close visibility and forecasting accuracy.</p>
+                </div>
+            </div>
+            <div class="case-card">
+                <div class="case-image case-image-3">
+                    <svg viewBox="0 0 24 24" fill="white"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg>
+                </div>
+                <div class="case-content">
+                    <div class="case-tag">GTM · B2B SaaS</div>
+                    <h3>Go-to-Market Launch</h3>
+                    <p>Developed positioning, pricing strategy, and launch playbook for a B2B software company entering a new vertical market.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Approach -->
+    <section class="approach" id="approach">
+        <div class="section-header">
+            <h2>How We Work</h2>
+            <p>We embed with your team, own outcomes, and build systems that outlast our engagement.</p>
+        </div>
+        <div class="approach-steps">
+            <div class="approach-step">
+                <div class="step-number">1</div>
+                <h3>Diagnose</h3>
+                <p>We start by understanding your business, not your symptoms.</p>
+            </div>
+            <div class="approach-step">
+                <div class="step-number">2</div>
+                <h3>Design</h3>
+                <p>Strategy and systems architecture — mapped to your goals.</p>
+            </div>
+            <div class="approach-step">
+                <div class="step-number">3</div>
+                <h3>Deliver</h3>
+                <p>We build, implement, and train your team to own it.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Team -->
+    <section class="team" id="team">
+        <div class="team-content">
+            <div class="team-photo">👤</div>
+            <div class="team-bio">
+                <div class="label">Founded By</div>
+                <h3>John Padwick</h3>
+                <p>15 years building marketing infrastructure for category-leading brands. Former CMO and President. MBA from UT Austin McCombs.</p>
+                <p>Comfortable in the boardroom and in the data.</p>
+                <div class="team-brands">
+                    <span>Merkle</span>
+                    <span>Marriott</span>
+                    <span>Hilton</span>
+                    <span>Disney</span>
+                    <span>Waldorf Astoria</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA -->
+    <section class="cta" id="contact">
+        <h2>Let's Build Something</h2>
+        <p>Have a marketing infrastructure challenge? Let's talk about whether we're the right fit.</p>
+        <a href="mailto:john@datastudio.com" class="btn">Start a Conversation</a>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 DataStudio. All rights reserved. | <a href="mailto:john@datastudio.com">john@datastudio.com</a></p>
+    </footer>
+</body>
+</html>

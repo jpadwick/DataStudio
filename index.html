@@ -27,7 +27,6 @@
         :root {
             --primary: #1a1a2e;
             --accent: #d4a853;
-            --accent-soft: rgba(212, 168, 83, 0.1);
             --text-dark: #1a1a2e;
             --text-medium: #4a4a68;
             --text-light: #717188;
@@ -36,442 +35,91 @@
             --bg-warm: #f5f4f0;
             --border: #e8e7e3;
         }
-        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            color: var(--text-dark);
-            line-height: 1.6;
-            background: var(--bg-white);
-        }
-        
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
+        body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text-dark); line-height: 1.6; background: var(--bg-white); }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .animate { opacity: 0; }
         .animate.visible { animation: fadeUp 0.6s ease forwards; }
-        
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 100;
-            padding: 1.25rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.4s ease;
-        }
-        
-        header.scrolled {
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(20px);
-            box-shadow: 0 1px 0 var(--border);
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: #fff;
-            text-decoration: none;
-        }
-        
+        header { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.25rem 5%; display: flex; justify-content: space-between; align-items: center; transition: all 0.4s ease; }
+        header.scrolled { background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); box-shadow: 0 1px 0 var(--border); }
+        .logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.3rem; font-weight: 800; color: #fff; text-decoration: none; }
         .logo img { height: 32px; filter: brightness(0) invert(1); transition: filter 0.3s; }
-        .logo span { color: var(--accent); }
+        .logo-text { color: inherit; }
+        .logo-accent { color: var(--accent); }
         header.scrolled .logo { color: var(--primary); }
         header.scrolled .logo img { filter: none; }
-        
         nav { display: flex; gap: 2.5rem; align-items: center; }
         nav a { text-decoration: none; color: rgba(255,255,255,0.85); font-weight: 500; font-size: 0.9rem; transition: color 0.3s; }
         nav a:hover { color: #fff; }
         header.scrolled nav a { color: var(--text-medium); }
         header.scrolled nav a:hover { color: var(--text-dark); }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.8rem 1.6rem;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.6rem; border-radius: 8px; font-weight: 600; font-size: 0.9rem; text-decoration: none; transition: all 0.3s ease; border: none; cursor: pointer; }
         .btn-primary { background: var(--accent); color: var(--primary); }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212, 168, 83, 0.35); }
-        .btn-outline { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.3); }
-        .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.5); }
-        
-        /* Hero — Clean, minimal */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-        }
-        
-        .hero-video {
-            position: absolute;
-            top: 50%; left: 50%;
-            min-width: 100%; min-height: 100%;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
-        }
-        
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(26, 26, 46, 0.92) 0%, rgba(30, 58, 95, 0.88) 100%);
-            z-index: 1;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 700px;
-            padding: 8rem 5% 4rem;
-            color: #fff;
-        }
-        
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 3.75rem);
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 1.25rem;
-            letter-spacing: -1.5px;
-        }
-        
-        .hero-subhead {
-            font-size: 1.15rem;
-            color: rgba(255,255,255,0.85);
-            margin-bottom: 2.5rem;
-            line-height: 1.7;
-            max-width: 560px;
-        }
-        
-        .hero-cta {
-            display: flex;
-            gap: 1.25rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        .hero-link {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.3s;
-        }
+        .hero { position: relative; min-height: 100vh; display: flex; align-items: center; }
+        .hero-video { position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; transform: translate(-50%, -50%); object-fit: cover; }
+        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(26, 26, 46, 0.92) 0%, rgba(30, 58, 95, 0.88) 100%); z-index: 1; }
+        .hero-content { position: relative; z-index: 2; max-width: 700px; padding: 8rem 5% 4rem; color: #fff; }
+        .hero h1 { font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.25rem; letter-spacing: -1.5px; }
+        .hero-subhead { font-size: 1.15rem; color: rgba(255,255,255,0.85); margin-bottom: 2.5rem; line-height: 1.7; max-width: 560px; }
+        .hero-cta { display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap; }
+        .hero-link { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
         .hero-link:hover { color: var(--accent); }
-        
-        /* Logo Strip */
-        .logo-strip {
-            background: var(--primary);
-            padding: 2.5rem 5%;
-            text-align: center;
-        }
-        
-        .logo-grid {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
-        }
-        
-        .logo-grid img {
-            height: 38px;
-            width: auto;
-            max-width: 100px;
-            object-fit: contain;
-            filter: grayscale(100%) brightness(2);
-            opacity: 0.6;
-            transition: opacity 0.3s;
-        }
-        
+        .logo-strip { background: var(--primary); padding: 2.5rem 5%; text-align: center; }
+        .logo-grid { display: flex; justify-content: center; align-items: center; gap: 3rem; flex-wrap: wrap; margin-bottom: 1rem; }
+        .logo-grid img { height: 38px; width: auto; max-width: 100px; object-fit: contain; filter: grayscale(100%) brightness(2); opacity: 0.6; transition: opacity 0.3s; }
         .logo-grid img:hover { opacity: 1; }
-        
-        .logo-strip p {
-            color: rgba(255,255,255,0.5);
-            font-size: 0.85rem;
-            font-style: italic;
-        }
-        
-        /* Sections */
+        .logo-strip p { color: rgba(255,255,255,0.5); font-size: 0.85rem; font-style: italic; }
         section { padding: 5rem 5%; }
         .container { max-width: 850px; margin: 0 auto; }
-        
-        .section-label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent);
-            margin-bottom: 0.75rem;
-        }
-        
-        .section-title {
-            font-size: clamp(1.6rem, 3vw, 2rem);
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            color: var(--text-dark);
-            margin-bottom: 1.25rem;
-        }
-        
-        /* Who Section — Tight */
+        .section-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 0.75rem; }
+        .section-title { font-size: clamp(1.6rem, 3vw, 2rem); font-weight: 800; letter-spacing: -0.5px; color: var(--text-dark); margin-bottom: 1.25rem; }
         .who-section { background: var(--bg-cream); }
-        
-        .who-content p {
-            font-size: 1.05rem;
-            color: var(--text-medium);
-            line-height: 1.8;
-        }
-        
-        .who-content p strong {
-            color: var(--text-dark);
-            font-weight: 600;
-        }
-        
-        /* Services */
-        .services-intro {
-            font-size: 1rem;
-            color: var(--text-medium);
-            line-height: 1.8;
-            margin-bottom: 2rem;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.25rem;
-        }
-        
-        .service-card {
-            background: var(--bg-cream);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 1.5rem;
-            transition: all 0.3s;
-        }
-        
-        .service-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
-        }
-        
-        .service-card h3 {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
-        }
-        
-        .service-card p {
-            color: var(--text-medium);
-            font-size: 0.9rem;
-            line-height: 1.65;
-        }
-        
-        /* Ways */
+        .who-content p { font-size: 1.05rem; color: var(--text-medium); line-height: 1.8; }
+        .who-content p strong { color: var(--text-dark); font-weight: 600; }
+        .services-intro { font-size: 1rem; color: var(--text-medium); line-height: 1.8; margin-bottom: 2rem; }
+        .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+        .service-card { background: var(--bg-cream); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; transition: all 0.3s; }
+        .service-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .service-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-dark); }
+        .service-card p { color: var(--text-medium); font-size: 0.9rem; line-height: 1.6; }
         .ways-section { background: var(--bg-white); }
-        
-        .ways-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .way-card {
-            background: var(--bg-cream);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1.25rem;
-        }
-        
-        .way-card h4 {
-            font-size: 0.95rem;
-            font-weight: 700;
-            margin-bottom: 0.4rem;
-            color: var(--text-dark);
-        }
-        
-        .way-card p {
-            color: var(--text-medium);
-            font-size: 0.85rem;
-            line-height: 1.55;
-        }
-        
-        .ways-note {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            font-style: italic;
-        }
-        
-        /* 90-Day Reset */
-        .reset-section {
-            background: linear-gradient(135deg, var(--primary) 0%, #2d2d4a 100%);
-            color: #fff;
-        }
-        
+        .ways-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem; }
+        .way-card { background: var(--bg-cream); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; }
+        .way-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text-dark); }
+        .way-card p { color: var(--text-medium); font-size: 0.85rem; line-height: 1.55; }
+        .ways-note { font-size: 0.9rem; color: var(--text-light); font-style: italic; }
+        .reset-section { background: linear-gradient(135deg, var(--primary) 0%, #2d2d4a 100%); color: #fff; }
         .reset-section .section-title { color: #fff; }
-        
-        .reset-intro {
-            color: rgba(255,255,255,0.75);
-            font-size: 1rem;
-            line-height: 1.75;
-            margin-bottom: 2rem;
-        }
-        
-        .phase-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-        }
-        
-        .phase-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 10px;
-            padding: 1.25rem;
-        }
-        
-        .phase-card h4 {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 0.6rem;
-        }
-        
+        .reset-intro { color: rgba(255,255,255,0.75); font-size: 1rem; line-height: 1.75; margin-bottom: 2rem; }
+        .phase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        .phase-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 1.25rem; }
+        .phase-card h4 { font-size: 0.9rem; font-weight: 700; color: var(--accent); margin-bottom: 0.6rem; }
         .phase-card ul { list-style: none; }
-        
-        .phase-card ul li {
-            color: rgba(255,255,255,0.8);
-            font-size: 0.85rem;
-            line-height: 1.55;
-            margin-bottom: 0.4rem;
-            padding-left: 0.9rem;
-            position: relative;
-        }
-        
-        .phase-card ul li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-        }
-        
-        /* Track Record */
+        .phase-card ul li { color: rgba(255,255,255,0.8); font-size: 0.85rem; line-height: 1.55; margin-bottom: 0.4rem; padding-left: 0.9rem; position: relative; }
+        .phase-card ul li::before { content: '•'; position: absolute; left: 0; color: var(--accent); }
         .track-section { background: var(--bg-cream); }
-        
-        .track-grid {
-            display: grid;
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .track-item {
-            background: var(--bg-white);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1rem 1.25rem;
-            font-size: 0.95rem;
-            color: var(--text-medium);
-            line-height: 1.6;
-        }
-        
+        .track-grid { display: grid; gap: 0.75rem; margin-bottom: 1.5rem; }
+        .track-item { background: var(--bg-white); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; font-size: 0.95rem; color: var(--text-medium); line-height: 1.6; }
         .track-item strong { color: var(--text-dark); }
-        
-        .track-closing {
-            font-size: 0.95rem;
-            color: var(--text-dark);
-            font-style: italic;
-        }
-        
-        /* About */
+        .track-closing { font-size: 0.95rem; color: var(--text-dark); font-style: italic; }
         .about-section { background: var(--bg-white); }
-        
-        .about-content p {
-            font-size: 1rem;
-            color: var(--text-medium);
-            line-height: 1.8;
-            margin-bottom: 1rem;
-        }
-        
-        /* CTA */
-        .cta-section {
-            background: var(--bg-warm);
-            text-align: center;
-            padding: 4rem 5%;
-        }
-        
-        .cta-section .section-title {
-            margin: 0 auto 0.75rem;
-            max-width: 500px;
-        }
-        
-        .cta-intro {
-            font-size: 1rem;
-            color: var(--text-medium);
-            line-height: 1.75;
-            max-width: 480px;
-            margin: 0 auto 1.75rem;
-        }
-        
-        .cta-subtext {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            max-width: 450px;
-            margin: 1.25rem auto 0;
-            line-height: 1.6;
-        }
-        
-        /* Footer */
-        footer {
-            padding: 2rem 5%;
-            background: var(--primary);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: rgba(255,255,255,0.5);
-            font-size: 0.85rem;
-        }
-        
+        .about-content p { font-size: 1rem; color: var(--text-medium); line-height: 1.8; margin-bottom: 1rem; }
+        .about-content p:last-child { margin-bottom: 0; }
+        .cta-section { background: var(--bg-warm); text-align: center; padding: 4rem 5%; }
+        .cta-section .section-title { margin: 0 auto 0.75rem; max-width: 500px; }
+        .cta-intro { font-size: 1rem; color: var(--text-medium); line-height: 1.75; max-width: 480px; margin: 0 auto 1.75rem; }
+        .cta-subtext { font-size: 0.85rem; color: var(--text-light); max-width: 450px; margin: 1.25rem auto 0; line-height: 1.6; }
+        footer { padding: 2rem 5%; background: var(--primary); display: flex; justify-content: space-between; align-items: center; color: rgba(255,255,255,0.5); font-size: 0.85rem; }
         footer a { color: var(--accent); text-decoration: none; }
-        
-        @media (max-width: 900px) {
-            .services-grid { grid-template-columns: 1fr; }
-            .ways-grid, .phase-grid { grid-template-columns: 1fr; }
-        }
-        
-        @media (max-width: 768px) {
-            nav { display: none; }
-            .logo-grid { gap: 2rem; }
-            .logo-grid img { height: 32px; }
-        }
+        @media (max-width: 900px) { .services-grid { grid-template-columns: 1fr; } .ways-grid, .phase-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { nav { display: none; } .logo-grid { gap: 2rem; } .logo-grid img { height: 32px; } }
     </style>
 </head>
 <body>
     <header>
-        <a href="#" class="logo"><img src="logos/ds-icon.png" alt="">Data<span>Studio</span></a>
+        <a href="#" class="logo"><img src="logos/ds-icon.png" alt=""><span class="logo-text">Data</span><span class="logo-accent">Studio</span></a>
         <nav>
             <a href="#what">What We Do</a>
             <a href="#how">How It Works</a>
@@ -479,11 +127,8 @@
             <a href="#start" class="btn btn-primary">Book a Session</a>
         </nav>
     </header>
-
     <section class="hero">
-        <video class="hero-video" autoplay muted loop playsinline>
-            <source src="https://categories.api.godaddy.com/v4/videos/raw/video/xrGWO5Q" type="video/mp4">
-        </video>
+        <video class="hero-video" autoplay muted loop playsinline><source src="https://categories.api.godaddy.com/v4/videos/raw/video/xrGWO5Q" type="video/mp4"></video>
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1>We rebuild how growth runs.</h1>
@@ -494,8 +139,6 @@
             </div>
         </div>
     </section>
-    
-    <!-- Logo Strip -->
     <div class="logo-strip">
         <div class="logo-grid">
             <img src="logos/hilton.png" alt="Hilton">
@@ -507,7 +150,6 @@
         </div>
         <p>Experience across enterprise hospitality, entertainment, and global agencies.</p>
     </div>
-    
     <section class="who-section" id="who">
         <div class="container">
             <div class="section-label animate">Who We Work With</div>
@@ -516,161 +158,118 @@
             </div>
         </div>
     </section>
-    
     <section class="what-section" id="what">
         <div class="container">
             <div class="section-label animate">What We Actually Do</div>
             <p class="services-intro animate">You bring ownership, context, and a team that wants to win. We bring pattern recognition from building and rebuilding growth engines across industries. Work is led by a senior partner, with specialists brought in as needed.</p>
-            
             <div class="services-grid">
                 <div class="service-card animate">
                     <h3>Ad-hoc C-level advisory</h3>
-                    <p>A senior sparring partner for GTM, metrics, and change decisions. Monthly or quarterly working sessions with leadership. Turn "we should use AI" into concrete initiatives with owners and timelines.</p>
+                    <p>A senior sparring partner for GTM, metrics, and change decisions. Monthly or quarterly working sessions. Turn "we should use AI" into concrete initiatives with owners and timelines.</p>
                 </div>
-                
                 <div class="service-card animate">
                     <h3>GTM and systems design</h3>
                     <p>Make the way you go to market match the scale you're aiming for. Clarify ICPs, offers, and funnel stages. Rebuild handoffs, SLAs, and measurement so everyone runs on the same scorecard.</p>
                 </div>
-                
                 <div class="service-card animate">
                     <h3>AI, LLM, and Salesforce initiatives</h3>
-                    <p>Use AI where it creates real leverage, not noise. High-ROI use cases: scoring, routing, summarization, ops automation. Practical implementations your team can own.</p>
+                    <p>AI and systems where they create real leverage, not noise. Scoring, routing, summarization, ops automation. Practical LLM workflows and Salesforce changes that fit your stack — and enable your team to own them.</p>
                 </div>
-                
                 <div class="service-card animate">
                     <h3>Ongoing GTM / RevOps tuning</h3>
-                    <p>Stay ahead once the basics are fixed. Monthly operating reviews, experiments, continuous improvement. A senior owner of "how the system works" until you hire that person.</p>
+                    <p>Monthly and quarterly operating reviews. Continuous improvement across attribution, forecasting, funnel efficiency, and channel mix. A single senior owner of "how the whole system works" until you hire that person in-house.</p>
                 </div>
             </div>
         </div>
     </section>
-    
     <section class="ways-section" id="how">
         <div class="container">
             <div class="section-label animate">Ways to Work Together</div>
-            
             <div class="ways-grid">
                 <div class="way-card animate">
                     <h4>Advisory</h4>
                     <p>Senior operator in your corner to pressure-test GTM, systems, and org decisions.</p>
                 </div>
                 <div class="way-card animate">
-                    <h4>Focused projects</h4>
+                    <h4>Focused GTM / AI projects</h4>
                     <p>Scoped work on specific problems — handoffs, metrics, LLM/Salesforce integration.</p>
                 </div>
                 <div class="way-card animate">
-                    <h4>90-day reset</h4>
-                    <p>Intensive three-phase program when you want a full redesign of how growth runs.</p>
+                    <h4>90-Day Reset</h4>
+                    <p>An intensive three-phase program when you want a full redesign of how growth runs.</p>
                 </div>
             </div>
-            
             <p class="ways-note animate">Typical engagements run 3–6 months, with retainer options for continuity.</p>
         </div>
     </section>
-    
     <section class="reset-section">
         <div class="container">
             <div class="section-label animate">The 90-Day Reset</div>
             <h2 class="section-title animate">When you're ready to rebuild the engine.</h2>
             <p class="reset-intro animate">Many leaders start with advisory or a focused project and grow into a reset once we both see the opportunity.</p>
-            
             <div class="phase-grid">
                 <div class="phase-card animate">
                     <h4>Phase 1: Diagnose (Weeks 1–3)</h4>
                     <ul>
                         <li>Audit GTM, systems, and reporting</li>
-                        <li>Map funnels, handoffs, KPIs</li>
-                        <li>Find the 3–5 biggest leaks</li>
+                        <li>Map funnels, handoffs, and KPIs</li>
                         <li>Prioritize AI/Salesforce opportunities</li>
                     </ul>
                 </div>
-                
                 <div class="phase-card animate">
                     <h4>Phase 2: Design (Weeks 3–6)</h4>
                     <ul>
                         <li>Define future-state GTM model</li>
                         <li>Specify tech and AI changes</li>
-                        <li>Build 6–12 month roadmap</li>
-                        <li>Assign owners and sequencing</li>
+                        <li>Build 6–12 month roadmap with owners</li>
                     </ul>
                 </div>
-                
                 <div class="phase-card animate">
                     <h4>Phase 3: Implement (Weeks 6–12)</h4>
                     <ul>
                         <li>Lead implementation across GTM, AI, systems</li>
                         <li>Embed new operating rhythm</li>
-                        <li>Hand off with documentation</li>
-                        <li>Leave a clear "how we run growth" model</li>
+                        <li>Hand off with documentation and dashboards</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
-    
     <section class="track-section" id="track">
         <div class="container">
             <div class="section-label animate">Track Record</div>
             <h2 class="section-title animate">You're not hiring theory.</h2>
-            
             <div class="track-grid">
-                <div class="track-item animate">
-                    <strong>Grew a travel vertical to over $100M in billings</strong> by aligning GTM strategy, data, and measurement around profitable growth.
-                </div>
-                <div class="track-item animate">
-                    <strong>Drove a $370M legal settlement pipeline</strong> by connecting data-driven client acquisition directly to case outcomes.
-                </div>
-                <div class="track-item animate">
-                    <strong>Scaled online revenue from single digits to nine figures</strong> by transforming legacy marketing into a unified digital-first engine.
-                </div>
-                <div class="track-item animate">
-                    <strong>Led high-ROI GTM programs for global brands</strong> in hospitality, travel, and services — consistently beating targets.
-                </div>
+                <div class="track-item animate"><strong>Created and led a new travel vertical inside a global agency</strong> — consolidating existing accounts and winning new ones to build a $100M+ practice across cruise, theme park, and luxury hotel clients.</div>
+                <div class="track-item animate"><strong>Drove a $370M legal settlement pipeline</strong> by connecting data-driven client acquisition directly to case outcomes.</div>
+                <div class="track-item animate"><strong>Scaled online revenue from single digits to nine figures</strong> by transforming legacy marketing into a unified digital-first engine.</div>
+                <div class="track-item animate"><strong>Led high-ROI GTM programs for global brands</strong> in hospitality, travel, and services — consistently beating targets.</div>
             </div>
-            
-            <p class="track-closing animate">If your team could have done this already, they would have. We help you change direction — and give them a system they can run.</p>
+            <p class="track-closing animate">If your existing team could have done this already, they would have. We help you change direction — and give them a system they can run.</p>
         </div>
     </section>
-    
     <section class="about-section" id="about">
         <div class="container">
             <div class="section-label animate">About DataStudio</div>
             <div class="about-content animate">
-                <p>DataStudio is a boutique growth consultancy focused on GTM, systems, and AI for founder-led and mid-market companies. We combine big-company transformation experience with the speed and focus of a small, senior-led studio.</p>
-                <p>Work is led directly by a senior partner, with trusted specialists brought in across analytics, marketing operations, Salesforce, and AI when a project demands it. No junior team. No black-box process. Just experienced operators focused on how your company actually runs growth.</p>
+                <p>DataStudio is a boutique growth consultancy focused on GTM, systems, and AI for founder-led and mid-market companies. We combine big-company growth and transformation experience with the speed and focus of a small, senior-led studio.</p>
+                <p>Work is led directly by a senior partner who has spent years transforming legacy organizations into modern, data-driven, AI-enabled engines — with trusted specialists brought in across analytics, marketing operations, Salesforce, and AI when projects demand it. You won't get a junior team or a black-box process — just experienced operators focused on how your company actually runs growth.</p>
             </div>
         </div>
     </section>
-    
     <section class="cta-section" id="start">
-        <div class="section-label animate">Get Started</div>
-        <h2 class="section-title animate">If you can feel the gap, that's the right moment.</h2>
+        <div class="section-label animate">Next Step</div>
         <p class="cta-intro animate">We work with a small number of leadership teams at a time to keep the work deep, not superficial.</p>
-        
         <a href="mailto:info@datastudio.com?subject=30-minute%20working%20session" class="btn btn-primary animate">Book a 30-Minute Working Session →</a>
-        
-        <p class="cta-subtext animate">In 30 minutes, we'll map your current reality, identify 2–3 leverage points, and decide whether advisory, a focused project, or a 90-day reset makes the most sense.</p>
+        <p class="cta-subtext animate">In 30 minutes, we'll map your current GTM and systems reality, identify 2–3 leverage points, and decide whether advisory, a focused project, or a 90-day reset makes the most sense.</p>
     </section>
-    
     <footer>
         <p>© 2026 DataStudio · Santa Monica, CA</p>
         <a href="mailto:info@datastudio.com">info@datastudio.com</a>
     </footer>
-    
     <script>
-        window.addEventListener('scroll', () => {
-            document.querySelector('header').classList.toggle('scrolled', window.scrollY > 50);
-        });
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => entry.target.classList.add('visible'), index * 50);
-                }
-            });
-        }, { threshold: 0.1 });
-        
+        window.addEventListener('scroll', () => { document.querySelector('header').classList.toggle('scrolled', window.scrollY > 50); });
+        const observer = new IntersectionObserver((entries) => { entries.forEach((entry, index) => { if (entry.isIntersecting) { setTimeout(() => entry.target.classList.add('visible'), index * 50); } }); }, { threshold: 0.1 });
         document.querySelectorAll('.animate').forEach(el => observer.observe(el));
     </script>
 </body>
